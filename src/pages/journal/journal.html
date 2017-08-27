@@ -1,0 +1,72 @@
+<!--
+  Generated template for the JournalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Journal</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar color="primary">
+    <ion-buttons start>
+      <button ion-button icon-only (click)="addDayToDate(-1)">
+        <ion-icon name="arrow-dropleft-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <ion-datetime cancelText="Annuler" doneText="Ok" displayFormat="DD/MM/YYYY" (ionChange)="updateDate()" [(ngModel)]="currentDate"></ion-datetime>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addDayToDate(1)">
+        <ion-icon name="arrow-dropright-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item-divider color="secondary">
+      Fabrication
+      <button ion-button item-right clear color="light" icon-left (click)="openEditProductionModal()">
+        <ion-icon name="create"></ion-icon>
+        Editer
+      </button>
+    </ion-item-divider>
+    <ion-item *ngIf="loadingRecipesProduced || loadingStockProduced">
+      <ion-spinner item-left></ion-spinner>
+      Chargement...
+    </ion-item>
+    <ion-item *ngFor="let recipe of recipesProduced | async">
+      {{ recipeNames[recipe.$key] }}
+      <span item-right>{{ recipe.$value }}x</span>
+    </ion-item>
+    <ion-item *ngFor="let stock of stockProduced | async">
+      {{ materialNames[stock.$key] }}
+      <span item-right>{{ stock.$value }}kg</span>
+    </ion-item>
+    <ion-item-divider color="secondary">
+      Modification de stock
+      <button ion-button item-right clear color="light" icon-left (click)="openEditStockModificationModal()">
+        <ion-icon name="create"></ion-icon>
+        Editer
+      </button>
+    </ion-item-divider>
+    <ion-item *ngIf="loadingStockModifications">
+      <ion-spinner item-left></ion-spinner>
+      Chargement...
+    </ion-item>
+    <ion-item-group *ngFor="let stockModification of stockModifications | async">
+      <ion-item *ngFor="let stockModificationDetail of getValues(stockModification)">
+        <h2>{{ materialNames[stockModification.$key] }}</h2>
+        <p>{{ stockModificationDetail.comment }}</p>
+        <span item-right>{{ stockModificationDetail.quantity }} kg</span>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,35 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Chocolat Etcetera - Journal de Fabrication</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <form>
+    <ion-list inset>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" name="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Mot de Passe</ion-label>
+        <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="errorMessage" class="text-ios-danger">{{ errorMessage }}</ion-item>
+    </ion-list>
+    <button ion-button block margin-top (click)="signIn()" inset [disabled]="loading">
+      <ion-spinner *ngIf="loading"></ion-spinner>
+      &nbsp;Connexion
+    </button>
+  </form>
+  <div id="legal-info">
+    <h2>FJCE</h2>
+    <p>Quentin Gangler</p>
+    <p>© Copyright 2017 <a href="http://www.chocolat-etcetera.fr/">Chocolat Etcetera</a></p>
+  </div>
+</ion-content>

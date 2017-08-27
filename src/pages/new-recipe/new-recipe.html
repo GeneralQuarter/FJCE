@@ -1,0 +1,58 @@
+<!--
+  Generated template for the NewRecipePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        Annuler
+      </button>
+    </ion-buttons>
+
+    <ion-title>{{recipe.$key? "Editer " + recipe.name : "Nouvelle recette"}}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button color="primary" (click)="addOrUpdateRecipe()">{{recipe.$key? "Sauvegarder" : "Ajouter"}}</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Nom</ion-label>
+      <ion-input type="text" name="name" [(ngModel)]="recipe.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Ingrédients</ion-label>
+      <ion-select cancelText="Annuler" name="ingredients" [(ngModel)]="ingredients" multiple="true" [compareWith]="compareFn2" (ionChange)="deleteOrphanRawMaterial()">
+        <ion-option *ngFor="let rm of rawMaterials | async"
+                    [value]="rm">
+          {{ rm.name }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="ingredients.length > 0">
+    <ion-list-header color="secondary">
+      Quantités (kg)
+    </ion-list-header>
+    <ion-item *ngFor="let ingredient of ingredients">
+      <ion-label floating>{{ ingredient.name }}</ion-label>
+      <ion-input type="number" name="quantity{{ ingredient.$key }}" [(ngModel)]="recipe.ingredients[ingredient.$key]"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer *ngIf="recipe.$key">
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button color="danger" (click)="deleteRecipe()">Supprimer</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

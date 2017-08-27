@@ -1,0 +1,46 @@
+<!--
+  Generated template for the EditStockModificationDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        Retour
+      </button>
+    </ion-buttons>
+    <ion-title>Modification de stock</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar color="primary">
+    <ion-title>{{ rawMaterial.name }}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="addStockModification()">
+        Ajouter
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item-group *ngFor="let stockModification of stockModifications | async">
+      <ion-item-divider>
+        <button ion-button item-right clear color="danger" (click)="deleteStockModification(stockModification)">Supprimer</button>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label>Quantité</ion-label>
+        <ion-input type="number" text-right name="stockModification{{ stockModification.$key }}-quantity" (ionBlur)="updateStockModification(stockModification)" [(ngModel)]="stockModification.quantity"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Commentaire</ion-label>
+        <ion-input type="text" text-right name="stockModification{{ stockModification.$key }}-comment" (ionBlur)="updateStockModification(stockModification)" [(ngModel)]="stockModification.comment"></ion-input>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

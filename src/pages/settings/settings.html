@@ -1,0 +1,47 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Paramètres</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item-divider color="secondary">
+      Compte
+      <button ion-button item-right clear color="light" (click)="logOut()">
+        Déconnexion
+      </button>
+    </ion-item-divider>
+    <ion-item>
+      Connecté en tant que
+      <h2 item-right>{{ user.email }}</h2>
+    </ion-item>
+    <ion-item-divider color="secondary">
+      Application
+    </ion-item-divider>
+    <ion-item>
+      Version
+      <h2 item-right>{{ version | async}}</h2>
+    </ion-item>
+    <ion-item>
+      Environment
+      <h2 item-right>prod</h2>
+    </ion-item>
+    <ion-item-divider color="secondary" *ngIf="false">
+      Feedback/Bug report
+      <button ion-button item-right clear color="light" icon-left (click)="addFeedback()">
+        <ion-icon name="create"></ion-icon>
+        Ajouter
+      </button>
+    </ion-item-divider>
+  </ion-list>
+</ion-content>

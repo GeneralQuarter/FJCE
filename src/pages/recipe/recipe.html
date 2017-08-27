@@ -1,0 +1,36 @@
+<!--
+  Generated template for the RecipePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Recipe</ion-title>
+  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar placeholder="Recherche" (ionInput)="searchRecipes($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngIf="loading" no-lines>
+      <ion-spinner item-start></ion-spinner>
+      Chargement...
+    </ion-item>
+    <ion-item *ngIf="empty" no-lines text-center>
+      Aucune recette
+    </ion-item>
+    <button ion-item *ngFor="let recipe of recipes | async" (click)="openAddNewRecipeModal(recipe)">
+      {{ recipe.name }}
+    </button>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="balanced" (click)="openAddNewRecipeModal()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
