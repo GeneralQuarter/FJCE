@@ -19,6 +19,7 @@ import {VersionProvider} from "../../providers/version/version";
 export class SettingsPage {
   user: firebase.User;
   version: Promise<string>;
+  environment: string;
 
   constructor(public app: App,
               public navParams: NavParams,
@@ -26,6 +27,7 @@ export class SettingsPage {
               private versionProvider: VersionProvider) {
     this.auth.authState.subscribe( user => this.user = user);
     this.version = this.versionProvider.getVersion();
+    this.environment = process.env.IONIC_ENV;
   }
 
   logOut() {

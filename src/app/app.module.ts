@@ -28,9 +28,7 @@ import {SettingsPage} from "../pages/settings/settings";
 import { VersionProvider } from '../providers/version/version';
 import {HttpModule} from "@angular/http";
 
-declare const process: any;
-
-let firebaseConfig = process.env.IONIC_ENV === "prod" ? prodEnv.firebase : devEnv.firebase;
+let firebaseConfig = process.env.IONIC_ENV === "dev" ? devEnv.firebase : prodEnv.firebase;
 
 @NgModule({
   declarations: [
