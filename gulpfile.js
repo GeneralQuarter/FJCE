@@ -1,52 +1,46 @@
-var gulp  = require('gulp');
-var git   = require('gulp-git');
-var argv  = require('yargs').argv;
-var edit  = require('gulp-edit');
-var shell = require('gulp-shell');
+var gulp    = require('gulp');
+var git     = require('gulp-git');
+var argv    = require('yargs').argv;
+var edit    = require('gulp-edit');
+var shell   = require('gulp-shell');
 
 var currentVersion = "";
 
-gulp.task("release", function (done) {
+gulp.task("checkoutPullDevelop", function (done) {
   git.checkout('develop', function (err) {
     logError(err);
     git.pull('origin', 'develop', function (err) {
       logError(err);
-      gulp.start("version", function () {
-        gulp.src("./*")
-          .pipe(git.add())
-          .pipe(git.commit('Bumped the version number to ' + currentVersion))
-      });
+      done();
     });
   });
+});
 
-  stream.on('end', function() {
-    git.push('origin', 'develop', function (err) {
+gulp.task("commitVersionNumber", function () {
+  return gulp.src("./src/assets/version.txt")
+    .pipe(git.add())
+    .pipe(git.commit('Bumped the version number to ' + currentVersion));
+});
+
+gulp.task("pushDevelopTagUpdateMaster", function (done) {
+  git.push('origin', 'develop', function (err) {
+    logError(err);
+    git.checkout('master', function (err) {
       logError(err);
-      git.checkout('master', function (err) {
+      git.pull('origin', 'master', function (err) {
         logError(err);
-        git.pull('origin', 'master', function (err) {
+        git.merge('develop', function (err) {
           logError(err);
-          git.merge('develop', function (err) {
+          git.tag('v' + currentVersion, 'Release ' + currentVersion, function (err) {
             logError(err);
-            git.tag('v' + currentVersion, 'Release ' + currentVersion, function (err) {
+            git.push('origin', function (err) {
               logError(err);
-              git.push('origin', function (err) {
-                logError(err);
-                gulp.start("build", function () {
-                  gulp.start("deploy", function () {
-                    done();
-                  });
-                });
-              });
+              done();
             });
           });
         });
       });
     });
-  });
-
-  stream.on('error', function(err) {
-    done(err);
   });
 });
 
@@ -87,3 +81,12 @@ gulp.task("version", function () {
     }))
     .pipe(gulp.dest('./src/assets/'))
 });
+
+gulp.task("release", gulp.series(
+  "checkoutPullDevelop",
+  "version",
+  "commitVersionNumber",
+  "pushDevelopTagUpdateMaster",
+  "build",
+  "deploy"
+));
