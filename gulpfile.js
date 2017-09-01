@@ -1,9 +1,12 @@
-var gulp    = require('gulp');
-var git     = require('gulp-git');
-var argv    = require('yargs').argv;
-var edit    = require('gulp-edit');
-var cp      = require('child_process');
+var gulp = require('gulp');
+var git = require('gulp-git');
+var argv = require('yargs').argv;
+var edit = require('gulp-edit');
+var spawn = require('child_process').spawn;
 
+// thanks to Mike 'Pomax' Kamermans: https://stackoverflow.com/questions/17516772/using-nodejss-spawn-causes-unknown-option-and-error-spawn-enoent-err/17537559#17537559
+var npm = (process.platform === "win32" ? "npm.cmd" : "npm");
+var firebase = (process.platform === "win32" ? "firebase.cmd" : "firebase");
 
 var currentVersion = "";
 
@@ -32,11 +35,14 @@ gulp.task("pushDevelopTagUpdateMaster", function (done) {
         logError(err);
         git.merge('develop', function (err) {
           logError(err);
-          git.tag('v' + currentVersion, 'Release ' + currentVersion, function (err) {
+          git.push('origin', function (err) {
             logError(err);
-            git.push('origin', function (err) {
+            git.tag('v' + currentVersion, 'Release ' + currentVersion, function (err) {
               logError(err);
-              done();
+              git.push('origin', 'v' + currentVersion, function (err) {
+                logError(err);
+                done();
+              });
             });
           });
         });
@@ -49,25 +55,33 @@ function logError(err) {
   if (err) throw err;
 }
 
-gulp.task("buildRelease", function (done) {
-  cp.exec('ionic build --prod', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    done();
+function exec(command, options, callback) {
+  var c = spawn(command, options);
+
+  c.stdout.on('data', function (data) {
+    console.log(data.toString());
   });
+
+  c.stderr.on('data', function (data) {
+    console.error(data.toString());
+  });
+
+  c.on('exit', function (code) {
+    callback(code);
+  });
+}
+
+gulp.task("buildRelease", function (done) {
+  exec(npm, ["run", "build", "--prod"], done);
 });
 
 gulp.task("deployRelease", function (done) {
-  cp.exec('firebase serve', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    done();
-  });
+  exec(firebase, ["deploy"], done);
 });
 
 gulp.task("version", function () {
   return gulp.src('./src/assets/version.txt')
-    .pipe(edit(function(src, cb){
+    .pipe(edit(function (src, cb) {
       var bump = 2; // PATCH
       switch (argv.bump) {
         case "MAJOR":
