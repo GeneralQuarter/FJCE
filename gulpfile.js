@@ -2,7 +2,8 @@ var gulp    = require('gulp');
 var git     = require('gulp-git');
 var argv    = require('yargs').argv;
 var edit    = require('gulp-edit');
-var shell   = require('gulp-shell');
+var cp      = require('child_process');
+
 
 var currentVersion = "";
 
@@ -48,9 +49,21 @@ function logError(err) {
   if (err) throw err;
 }
 
-gulp.task("build", shell.task('ionic build --prod'));
+gulp.task("buildRelease", function (done) {
+  cp.exec('ionic build --prod', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    done();
+  });
+});
 
-gulp.task("deploy", shell.task('firebase serve'));
+gulp.task("deployRelease", function (done) {
+  cp.exec('firebase serve', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    done();
+  });
+});
 
 gulp.task("version", function () {
   return gulp.src('./src/assets/version.txt')
@@ -87,6 +100,6 @@ gulp.task("release", gulp.series(
   "version",
   "commitVersionNumber",
   "pushDevelopTagUpdateMaster",
-  "build",
-  "deploy"
+  "buildRelease",
+  "deployRelease"
 ));
