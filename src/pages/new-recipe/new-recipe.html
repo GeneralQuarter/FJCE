@@ -22,14 +22,14 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-list>
     <ion-item>
-      <ion-label>Nom</ion-label>
+      <ion-label floating>Nom</ion-label>
       <ion-input type="text" name="name" [(ngModel)]="recipe.name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Ingrédients</ion-label>
+      <ion-label floating>Ingrédients</ion-label>
       <ion-select cancelText="Annuler" name="ingredients" [(ngModel)]="ingredients" multiple="true" [compareWith]="compareFn2" (ionChange)="deleteOrphanRawMaterial()">
         <ion-option *ngFor="let rm of rawMaterials | async"
                     [value]="rm">

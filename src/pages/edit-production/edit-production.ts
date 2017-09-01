@@ -5,6 +5,7 @@ import {RawMaterial, RawMaterialProvider} from "../../providers/raw-material/raw
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/do'
 import {AngularFireDatabase} from "angularfire2/database";
+import {Subscription} from "rxjs/Subscription";
 
 /**
  * Generated class for the EditProductionPage page.
@@ -27,12 +28,17 @@ export class EditProductionPage {
   loadingComposedMaterials: boolean;
   composedMaterialsProduced: {[key: string]: number}[];
 
+  private sub: Subscription;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public viewCtrl: ViewController,
               private recipeProvider: RecipeProvider,
               private rawMaterialProvider: RawMaterialProvider,
               private db: AngularFireDatabase) {
+  }
+
+  ngOnInit() {
     this.dateKey = this.navParams.get("dateKey");
 
     this.recipesProduced = [];
@@ -49,10 +55,8 @@ export class EditProductionPage {
       () => this.loadingComposedMaterials = false,
       () => this.loadingComposedMaterials = false
     );
-  }
 
-  ngOnInit() {
-    this.db.object("/journal/" + this.dateKey + "/production").subscribe(data => {
+    this.sub = this.db.object("/journal/" + this.dateKey + "/production").subscribe(data => {
       if (data.recipes) {
         this.recipesProduced = data.recipes;
       }
@@ -60,6 +64,10 @@ export class EditProductionPage {
         this.composedMaterialsProduced = data.stock;
       }
     });
+  }
+
+  ionViewDidLeave() {
+    this.sub.unsubscribe();
   }
 
   dismiss() {

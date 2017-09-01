@@ -34,12 +34,12 @@
         <button ion-button item-right clear color="danger" (click)="deleteStockModification(stockModification)">Supprimer</button>
       </ion-item-divider>
       <ion-item>
-        <ion-label>Quantité</ion-label>
-        <ion-input type="number" text-right name="stockModification{{ stockModification.$key }}-quantity" (ionBlur)="updateStockModification(stockModification)" [(ngModel)]="stockModification.quantity"></ion-input>
+        <ion-label floating>Quantité</ion-label>
+        <ion-input type="number" name="stockModification{{ stockModification.$key }}-quantity" (ionBlur)="updateStockModification(stockModification)" [(ngModel)]="stockModification.quantity"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Commentaire</ion-label>
-        <ion-input type="text" text-right name="stockModification{{ stockModification.$key }}-comment" (ionBlur)="updateStockModification(stockModification)" [(ngModel)]="stockModification.comment"></ion-input>
+        <ion-label floating>Commentaire</ion-label>
+        <ion-input type="text" name="stockModification{{ stockModification.$key }}-comment" (ionBlur)="updateStockModification(stockModification)" [(ngModel)]="stockModification.comment"></ion-input>
       </ion-item>
     </ion-item-group>
   </ion-list>

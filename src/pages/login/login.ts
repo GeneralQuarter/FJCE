@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {AngularFireAuth} from "angularfire2/auth";
 import * as firebase from 'firebase/app';
-import {TabsPage} from "../tabs/tabs";
+import {AuthProvider} from "../../providers/auth/auth";
 
 /**
  * Generated class for the LoginPage page.
@@ -19,27 +19,13 @@ export class LoginPage {
   password: string;
   errorMessage: string;
   loading: boolean;
-  logout: boolean;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private auth: AngularFireAuth) {
-    this.logout = !!this.navParams.get("logout");
+  constructor(public navParams: NavParams,
+              private auth: AngularFireAuth,
+              private authProvider: AuthProvider) {
     this.auth.authState.subscribe((user: firebase.User) => {
-      if (!user) {
-        return;
-      }
-      this.goToApp();
+      this.authProvider.authNotifier.next(!!user);
     });
-  }
-
-  private goToApp() {
-    if (!this.logout) {
-      this.navCtrl.setRoot(TabsPage);
-    } else {
-      this.logout = false;
-      this.auth.auth.signOut();
-    }
   }
 
   signIn() {

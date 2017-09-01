@@ -112,8 +112,8 @@ gulp.task("version", function () {
 gulp.task("release", gulp.series(
   "checkoutPullDevelop",
   "version",
+  "buildRelease",
   "commitVersionNumber",
   "pushDevelopTagUpdateMaster",
-  "buildRelease",
   "deployRelease"
 ));

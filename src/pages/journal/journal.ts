@@ -7,7 +7,7 @@ import {RawMaterialProvider} from "../../providers/raw-material/raw-material";
 import 'rxjs/add/operator/do'
 import {Observable} from "rxjs/Observable";
 import {EditStockModificationPage} from "../edit-stock-modification/edit-stock-modification";
-import {Subject} from "rxjs/Subject";
+import {Subscription} from "rxjs/Subscription";
 
 /**
  * Generated class for the JournalPage page.
@@ -31,7 +31,9 @@ export class JournalPage {
   loadingRecipesProduced: boolean;
   loadingStockProduced: boolean;
   loadingStockModifications: boolean;
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
+
+  private sub1: Subscription;
+  private sub2: Subscription;
 
   constructor(public navParams: NavParams,
               public modalCtrl: ModalController,
@@ -42,13 +44,13 @@ export class JournalPage {
 
   ionViewWillEnter() {
     this.recipeNames = [];
-    this.recipeProvider.getRecipes().takeUntil(this.ngUnsubscribe).subscribe(data => {
+    this.sub1 = this.recipeProvider.getRecipes().subscribe(data => {
       for (const recipe of data) {
         this.recipeNames[recipe.$key] = recipe.name;
       }
     });
     this.materialNames = [];
-    this.rawMaterialProvider.getRawMaterials().takeUntil(this.ngUnsubscribe).subscribe(data => {
+    this.sub2 = this.rawMaterialProvider.getRawMaterials().subscribe(data => {
       for (const rawMaterial of data) {
         this.materialNames[rawMaterial.$key] = rawMaterial.name;
       }
@@ -58,8 +60,8 @@ export class JournalPage {
   }
 
   ionViewDidLeave() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
   }
 
   updateDate() {

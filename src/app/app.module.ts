@@ -15,7 +15,6 @@ import {StockPage} from "../pages/stock/stock";
 import {ConsumptionPage} from "../pages/consumption/consumption";
 import {NewStockPage} from "../pages/new-stock/new-stock";
 import {ReactiveFormsModule} from "@angular/forms";
-import {KeysPipe} from "../pipes/keys/keys";
 import { RecipeProvider } from '../providers/recipe/recipe';
 import {NewRecipePage} from "../pages/new-recipe/new-recipe";
 import {EditProductionPage} from "../pages/edit-production/edit-production";
@@ -27,13 +26,13 @@ import {devEnv, prodEnv} from "./environments";
 import {SettingsPage} from "../pages/settings/settings";
 import { VersionProvider } from '../providers/version/version';
 import {HttpModule} from "@angular/http";
+import { AuthProvider } from '../providers/auth/auth';
 
 let firebaseConfig = process.env.IONIC_ENV === "dev" ? devEnv.firebase : prodEnv.firebase;
 
 @NgModule({
   declarations: [
     MyApp,
-    KeysPipe,
     TabsPage,
     JournalPage,
     RecipePage,
@@ -78,7 +77,8 @@ let firebaseConfig = process.env.IONIC_ENV === "dev" ? devEnv.firebase : prodEnv
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RawMaterialProvider,
     RecipeProvider,
-    VersionProvider
+    VersionProvider,
+    AuthProvider
   ]
 })
 export class AppModule {}

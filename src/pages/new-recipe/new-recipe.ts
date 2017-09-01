@@ -3,6 +3,7 @@ import {AlertController, NavController, NavParams, ViewController} from 'ionic-a
 import {Recipe, RecipeProvider} from "../../providers/recipe/recipe";
 import {RawMaterial, RawMaterialProvider} from "../../providers/raw-material/raw-material";
 import {Observable} from "rxjs/Observable";
+import {Subscription} from "rxjs/Subscription";
 
 /**
  * Generated class for the NewRecipePage page.
@@ -20,6 +21,7 @@ export class NewRecipePage {
   recipe: Recipe;
   ingredients: RawMaterial[];
   rawMaterials: Observable<RawMaterial[]>;
+  private sub: Subscription;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -27,6 +29,9 @@ export class NewRecipePage {
               private rawMaterialProvider: RawMaterialProvider,
               private alertCtrl: AlertController,
               private recipeProvider: RecipeProvider) {
+  }
+
+  ngOnInit() {
     this.recipe = this.navParams.get("recipe");
     if(!this.recipe) {
       this.recipe = {
@@ -39,7 +44,7 @@ export class NewRecipePage {
       this.recipe.ingredients = [];
     }
     this.rawMaterials = this.rawMaterialProvider.getRawMaterials();
-    this.rawMaterials
+    this.sub = this.rawMaterials
       .subscribe(_rawMaterials => {
         for (const rawMaterial of _rawMaterials) {
           for (const ingredientKey in this.recipe.ingredients) {
@@ -49,7 +54,10 @@ export class NewRecipePage {
           }
         }
       });
+  }
 
+  ionViewDidLeave() {
+    this.sub.unsubscribe();
   }
 
   dismiss() {

@@ -30,7 +30,7 @@
       <ion-input type="text" name="name" [(ngModel)]="rawMaterial.name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Sous ingrédients</ion-label>
+      <ion-label floating>Sous ingrédients</ion-label>
       <ion-select cancelText="Annuler" name="ingredients" [(ngModel)]="ingredients" multiple="true" [compareWith]="compareFn" (ionChange)="deleteOrphanRawMaterial()">
         <ion-option *ngFor="let rm of rawMaterials | async"
                     [value]="rm"

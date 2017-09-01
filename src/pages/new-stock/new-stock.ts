@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AlertController, NavController, NavParams, ViewController} from 'ionic-angular';
 import {RawMaterial, RawMaterialProvider} from "../../providers/raw-material/raw-material";
 import {Observable} from "rxjs/Observable";
+import {Subscription} from "rxjs/Subscription";
 
 /**
  * Generated class for the NewStockPage page.
@@ -18,12 +19,16 @@ export class NewStockPage {
   rawMaterial: RawMaterial;
   rawMaterials: Observable<RawMaterial[]>;
   ingredients: RawMaterial[];
+  private sub: Subscription;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public viewCtrl: ViewController,
               private alertCtrl: AlertController,
               private rawMaterialProvider: RawMaterialProvider) {
+  }
+
+  ngOnInit() {
     this.rawMaterial = this.navParams.get("rawMaterial");
     this.ingredients = [];
     if (!this.rawMaterial) {
@@ -35,7 +40,7 @@ export class NewStockPage {
     if (!this.rawMaterial.ingredients && !this.rawMaterial.$key) {
       this.rawMaterial.ingredients = [];
     } else {
-      this.rawMaterials
+      this.sub = this.rawMaterials
         .subscribe(_rawMaterials => {
           for (const rawMaterial of _rawMaterials) {
             for (const ingredientKey in this.rawMaterial.ingredients) {
@@ -45,6 +50,12 @@ export class NewStockPage {
             }
           }
         });
+    }
+  }
+
+  ionViewDidLeave() {
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
   }
 

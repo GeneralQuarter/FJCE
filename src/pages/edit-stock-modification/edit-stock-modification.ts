@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/do'
 import {EditStockModificationDetailPage} from "../edit-stock-modification-detail/edit-stock-modification-detail";
 import {AngularFireDatabase} from "angularfire2/database";
+import {Subscription} from "rxjs/Subscription";
 
 /**
  * Generated class for the EditStockModificationPage page.
@@ -21,6 +22,7 @@ export class EditStockModificationPage {
   rawMaterials: Observable<RawMaterial[]>;
   stockModifications: {[key: string]: number};
   dateKey: string;
+  sub: Subscription;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -28,8 +30,6 @@ export class EditStockModificationPage {
               public modalCtrl: ModalController,
               private rawMaterialProvider: RawMaterialProvider,
               private db: AngularFireDatabase) {
-    this.rawMaterials = this.rawMaterialProvider.getRawMaterials();
-    this.dateKey = this.navParams.get("dateKey");
   }
 
   searchRawMaterials(event: any) {
@@ -40,13 +40,19 @@ export class EditStockModificationPage {
     }
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    this.rawMaterials = this.rawMaterialProvider.getRawMaterials();
+    this.dateKey = this.navParams.get("dateKey");
     this.stockModifications = {};
-    this.db.list("/journal/" + this.dateKey + "/stock_modification").subscribe(stockModifications => {
+    this.sub = this.db.list("/journal/" + this.dateKey + "/stock_modification").subscribe(stockModifications => {
       for (const stockModification of stockModifications) {
         this.stockModifications[stockModification.$key] = Object.keys(stockModification).length;
       }
     });
+  }
+
+  ionViewDidLeave() {
+    this.sub.unsubscribe();
   }
 
   dismiss() {
