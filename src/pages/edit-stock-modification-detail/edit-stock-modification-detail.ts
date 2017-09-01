@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ViewController} from 'ionic-angular';
+import {NavParams, ViewController} from 'ionic-angular';
 import {RawMaterial} from "../../providers/raw-material/raw-material";
 import {AngularFireDatabase, FirebaseListObservable} from "angularfire2/database";
 
@@ -24,8 +24,7 @@ export class EditStockModificationDetailPage {
   dateKey: string;
   rawMaterial: RawMaterial;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
+  constructor(public navParams: NavParams,
               public viewCtrl: ViewController,
               private db: AngularFireDatabase) {
     this.rawMaterial = this.navParams.get("rawMaterial");

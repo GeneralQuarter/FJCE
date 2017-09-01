@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ModalController, NavParams} from 'ionic-angular';
+import {ModalController} from 'ionic-angular';
 import {EditProductionPage} from "../edit-production/edit-production";
 import {AngularFireDatabase} from "angularfire2/database";
 import {RecipeProvider} from "../../providers/recipe/recipe";
@@ -35,8 +35,7 @@ export class JournalPage {
   private sub1: Subscription;
   private sub2: Subscription;
 
-  constructor(public navParams: NavParams,
-              public modalCtrl: ModalController,
+  constructor(public modalCtrl: ModalController,
               private db: AngularFireDatabase,
               private recipeProvider: RecipeProvider,
               private rawMaterialProvider: RawMaterialProvider) {

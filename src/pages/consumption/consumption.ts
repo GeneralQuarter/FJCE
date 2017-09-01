@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the ConsumptionPage page.
@@ -14,8 +13,7 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class ConsumptionPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    //test
+  constructor() {
   }
 
 }

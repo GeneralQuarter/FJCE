@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {App, NavParams} from 'ionic-angular';
+import {App} from 'ionic-angular';
 import {AngularFireAuth} from "angularfire2/auth";
 import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/do'
@@ -24,7 +24,6 @@ export class SettingsPage {
   private sub: Subscription;
 
   constructor(public app: App,
-              public navParams: NavParams,
               private auth: AngularFireAuth,
               private versionProvider: VersionProvider,
               private authProvider: AuthProvider) {

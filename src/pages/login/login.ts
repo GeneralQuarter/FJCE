@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 import {AngularFireAuth} from "angularfire2/auth";
 import * as firebase from 'firebase/app';
 import {AuthProvider} from "../../providers/auth/auth";
@@ -20,8 +19,7 @@ export class LoginPage {
   errorMessage: string;
   loading: boolean;
 
-  constructor(public navParams: NavParams,
-              private auth: AngularFireAuth,
+  constructor(private auth: AngularFireAuth,
               private authProvider: AuthProvider) {
     this.auth.authState.subscribe((user: firebase.User) => {
       this.authProvider.authNotifier.next(!!user);

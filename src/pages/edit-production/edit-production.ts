@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {NavController, NavParams, ViewController} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {NavParams, ViewController} from 'ionic-angular';
 import {Recipe, RecipeProvider} from "../../providers/recipe/recipe";
 import {RawMaterial, RawMaterialProvider} from "../../providers/raw-material/raw-material";
 import {Observable} from "rxjs/Observable";
@@ -18,7 +18,7 @@ import {Subscription} from "rxjs/Subscription";
   selector: 'page-edit-production',
   templateUrl: 'edit-production.html',
 })
-export class EditProductionPage {
+export class EditProductionPage implements OnInit{
   dateKey: string;
   recipes: Observable<Recipe[]>;
   loadingRecipes: boolean;
@@ -30,8 +30,7 @@ export class EditProductionPage {
 
   private sub: Subscription;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
+  constructor(public navParams: NavParams,
               public viewCtrl: ViewController,
               private recipeProvider: RecipeProvider,
               private rawMaterialProvider: RawMaterialProvider,

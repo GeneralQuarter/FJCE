@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {AlertController, NavParams, ViewController} from 'ionic-angular';
 import {Recipe, RecipeProvider} from "../../providers/recipe/recipe";
 import {RawMaterial, RawMaterialProvider} from "../../providers/raw-material/raw-material";
 import {Observable} from "rxjs/Observable";
@@ -11,20 +11,18 @@ import {Subscription} from "rxjs/Subscription";
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
 @Component({
   selector: 'page-new-recipe',
   templateUrl: 'new-recipe.html',
 })
-export class NewRecipePage {
+export class NewRecipePage implements OnInit{
 
   recipe: Recipe;
   ingredients: RawMaterial[];
   rawMaterials: Observable<RawMaterial[]>;
   private sub: Subscription;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
+  constructor(public navParams: NavParams,
               public viewCtrl: ViewController,
               private rawMaterialProvider: RawMaterialProvider,
               private alertCtrl: AlertController,

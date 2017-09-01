@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ModalController, NavController, NavParams} from 'ionic-angular';
+import {ModalController} from 'ionic-angular';
 import {Observable} from "rxjs/Observable";
 import {Recipe, RecipeProvider} from "../../providers/recipe/recipe";
 import 'rxjs/add/operator/do'
@@ -21,9 +21,7 @@ export class RecipePage {
   empty: boolean;
   recipes: Observable<Recipe[]>;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private recipeProvider: RecipeProvider,
+  constructor(private recipeProvider: RecipeProvider,
               public modalCtrl: ModalController) {
     this.loading = true;
     this.recipes = this.recipeProvider.getRecipes().do(

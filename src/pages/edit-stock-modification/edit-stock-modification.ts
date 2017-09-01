@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ModalController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {ModalController, NavParams, ViewController} from 'ionic-angular';
 import {RawMaterial, RawMaterialProvider} from "../../providers/raw-material/raw-material";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/do'
@@ -24,8 +24,7 @@ export class EditStockModificationPage {
   dateKey: string;
   sub: Subscription;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
+  constructor(public navParams: NavParams,
               public viewCtrl: ViewController,
               public modalCtrl: ModalController,
               private rawMaterialProvider: RawMaterialProvider,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ModalController, NavController, NavParams} from 'ionic-angular';
+import {ModalController} from 'ionic-angular';
 import {RawMaterial, RawMaterialProvider} from "../../providers/raw-material/raw-material";
 import {Observable} from "rxjs/Observable";
 import {NewStockPage} from "../new-stock/new-stock";
@@ -19,9 +19,7 @@ export class StockPage {
   rawMaterials: Observable<RawMaterial[]>;
   loading: boolean;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private rawMaterialProvider: RawMaterialProvider,
+  constructor(private rawMaterialProvider: RawMaterialProvider,
               public modalCtrl: ModalController) {
     this.loading = true;
     this.rawMaterials = this.rawMaterialProvider.getRawMaterials().do(

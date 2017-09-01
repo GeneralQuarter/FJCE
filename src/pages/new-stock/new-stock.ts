@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {AlertController, NavParams, ViewController} from 'ionic-angular';
 import {RawMaterial, RawMaterialProvider} from "../../providers/raw-material/raw-material";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
@@ -14,15 +14,14 @@ import {Subscription} from "rxjs/Subscription";
   selector: 'page-new-stock',
   templateUrl: 'new-stock.html',
 })
-export class NewStockPage {
+export class NewStockPage implements OnInit{
 
   rawMaterial: RawMaterial;
   rawMaterials: Observable<RawMaterial[]>;
   ingredients: RawMaterial[];
   private sub: Subscription;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
+  constructor(public navParams: NavParams,
               public viewCtrl: ViewController,
               private alertCtrl: AlertController,
               private rawMaterialProvider: RawMaterialProvider) {
