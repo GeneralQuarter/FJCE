@@ -3,6 +3,7 @@ import {AlertController, NavParams, ViewController} from 'ionic-angular';
 import {RawMaterial, RawMaterialProvider} from "../../providers/raw-material/raw-material";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
+import {TranslateService} from "@ngx-translate/core";
 
 /**
  * Generated class for the NewStockPage page.
@@ -24,7 +25,8 @@ export class NewStockPage implements OnInit{
   constructor(public navParams: NavParams,
               public viewCtrl: ViewController,
               private alertCtrl: AlertController,
-              private rawMaterialProvider: RawMaterialProvider) {
+              private rawMaterialProvider: RawMaterialProvider,
+              private translateService: TranslateService) {
   }
 
   ngOnInit() {
@@ -73,24 +75,26 @@ export class NewStockPage implements OnInit{
   }
 
   deleteRawMaterial() {
-    let alert = this.alertCtrl.create({
-      title: 'Supprimer ' + this.rawMaterial.name,
-      message: 'Cette action est irréversible',
-      buttons: [
-        {
-          text: 'Annuler',
-          role: 'cancel'
-        },
-        {
-          text: 'Supprimer',
-          handler: () => {
-            this.rawMaterialProvider.deleteRawMaterial(this.rawMaterial);
-            this.dismiss();
+    this.translateService.get(['NEW_STOCK.TITLE.DELETE', 'IRREVERSIBLE_ACTION', 'CANCEL', 'DELETE'], this.rawMaterial).subscribe( translation => {
+      let alert = this.alertCtrl.create({
+        title: translation['NEW_STOCK.TITLE.DELETE'],
+        message: translation['IRREVERSIBLE_ACTION'],
+        buttons: [
+          {
+            text: translation['CANCEL'],
+            role: 'cancel'
+          },
+          {
+            text: translation['DELETE'],
+            handler: () => {
+              this.rawMaterialProvider.deleteRawMaterial(this.rawMaterial);
+              this.dismiss();
+            }
           }
-        }
-      ]
+        ]
+      });
+      alert.present();
     });
-    alert.present();
   }
 
   compareFn(e1: RawMaterial, e2: RawMaterial): boolean {

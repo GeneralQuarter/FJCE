@@ -13,4 +13,31 @@ page-login {
      margin: 0;
    }
  }
+
+  #language-switch {
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    width: 100px;
+
+    .flag {
+      background-size: contain;
+      position: relative;
+      display: inline-block;
+      width: 1.33333333em;
+      line-height: 1em;
+    }
+
+    .flag:before {
+      content: "\00a0";
+    }
+
+    .flag-fr {
+      background-image: url('../assets/icon/fr.svg');
+    }
+
+    .flag-en {
+      background-image: url('../assets/icon/en.svg');
+    }
+  }
 }

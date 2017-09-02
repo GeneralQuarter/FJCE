@@ -9,21 +9,21 @@
   <ion-navbar>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
-        Annuler
+        {{ 'CANCEL' | translate }}
       </button>
     </ion-buttons>
 
-    <ion-title>Fabrication</ion-title>
+    <ion-title>{{ 'PRODUCTION.TITLE' | translate }}</ion-title>
 
     <ion-buttons end>
       <button ion-button color="primary" (click)="saveProduction()">
-        Sauvegarder
+        {{ 'SAVE' | translate }}
       </button>
     </ion-buttons>
   </ion-navbar>
 
   <ion-toolbar color="primary">
-    <ion-searchbar placeholder="Recherche" (ionInput)="searchProduction($event)"></ion-searchbar>
+    <ion-searchbar [placeholder]="'SEARCH_PLACEHOLDER' | translate" (ionInput)="searchProduction($event)"></ion-searchbar>
   </ion-toolbar>
 
 </ion-header>
@@ -31,10 +31,10 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-divider color="secondary">Recettes</ion-item-divider>
+    <ion-item-divider color="secondary">{{ 'RECIPES.TITLE' | translate }}</ion-item-divider>
     <ion-item *ngIf="loadingRecipes" no-lines>
       <ion-spinner item-left></ion-spinner>
-      Chargement...
+      {{ 'LOADING' | translate }}...
     </ion-item>
     <ion-item *ngFor="let recipe of recipes | async">
       <ion-label>{{ recipe.name }}</ion-label>
@@ -42,12 +42,12 @@
                  name="recipeProduced{{ recipe.$key }}"
                  [(ngModel)]="recipesProduced[recipe.$key]"
                  text-right
-                 placeholder="Nombre de fois produite"></ion-input>
+                 [placeholder]="'TIMES_PRODUCED_PLACEHOLDER' | translate"></ion-input>
     </ion-item>
-    <ion-item-divider color="secondary">Ingrédients composés</ion-item-divider>
+    <ion-item-divider color="secondary">{{ 'COMPOSED_INGREDIENTS_HEADER' | translate }}</ion-item-divider>
     <ion-item *ngIf="loadingComposedMaterials" no-lines>
       <ion-spinner item-left></ion-spinner>
-      Chargement...
+      {{ 'LOADING' | translate }}...
     </ion-item>
     <ion-item *ngFor="let composedMaterial of composedMaterials | async">
       <ion-label>{{ composedMaterial.name }}</ion-label>
@@ -55,7 +55,7 @@
                  name="composedMaterialsProduced{{ composedMaterial.$key }}"
                  [(ngModel)]="composedMaterialsProduced[composedMaterial.$key]"
                  text-right
-                 placeholder="Nombre de kg produit"></ion-input>
+                 [placeholder]="'KG_PRODUCED_PLACEHOLDER' | translate"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -6,30 +6,40 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Chocolat Etcetera - Journal de Fabrication</ion-title>
+    <ion-title>{{ 'TITLE' | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <form>
     <ion-list inset>
       <ion-item>
-        <ion-label floating>Email</ion-label>
+        <ion-label floating>{{ 'LOGIN.EMAIL_LABEL' | translate}}</ion-label>
         <ion-input type="email" name="email" [(ngModel)]="email"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Mot de Passe</ion-label>
+        <ion-label floating>{{ 'LOGIN.PASSWORD_LABEL' | translate}}</ion-label>
         <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
       </ion-item>
       <ion-item *ngIf="errorMessage" class="text-ios-danger">{{ errorMessage }}</ion-item>
     </ion-list>
     <button ion-button block margin-top (click)="signIn()" inset [disabled]="loading">
       <ion-spinner *ngIf="loading"></ion-spinner>
-      &nbsp;Connexion
+      &nbsp;{{ 'LOGIN.LOGIN_BUTTON' | translate}}
     </button>
   </form>
   <div id="legal-info">
     <h2>FJCE</h2>
     <p>Quentin Gangler</p>
     <p>© Copyright 2017 <a href="http://www.chocolat-etcetera.fr/">Chocolat Etcetera</a></p>
+  </div>
+  <div id="language-switch">
+    <ion-segment [(ngModel)]="language" color="secondary" (ionChange)="changeLanguage()">
+      <ion-segment-button value="fr">
+        <span class="flag flag-fr"></span> FR
+      </ion-segment-button>
+      <ion-segment-button value="en">
+        <span class="flag flag-en"></span> EN
+      </ion-segment-button>
+    </ion-segment>
   </div>
 </ion-content>

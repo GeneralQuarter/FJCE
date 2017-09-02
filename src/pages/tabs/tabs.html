@@ -1,7 +1,7 @@
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Journal" tabIcon="calendar"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Recettes" tabIcon="clipboard"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Stock" tabIcon="cube"></ion-tab>
-  <ion-tab [root]="tab4Root" tabTitle="Consomation" tabIcon="pie"></ion-tab>
-  <ion-tab [root]="tab5Root" tabTitle="Paramètres" tabIcon="settings"></ion-tab>
+  <ion-tab [root]="tab1Root" [tabTitle]="'JOURNAL.TITLE' | translate" tabIcon="calendar"></ion-tab>
+  <ion-tab [root]="tab2Root" [tabTitle]="'RECIPES.TITLE' | translate" tabIcon="clipboard"></ion-tab>
+  <ion-tab [root]="tab3Root" [tabTitle]="'STOCK.TITLE' | translate" tabIcon="cube"></ion-tab>
+  <ion-tab [root]="tab4Root" [tabTitle]="'CONSUMPTION.TITLE' | translate" tabIcon="pie"></ion-tab>
+  <ion-tab [root]="tab5Root" [tabTitle]="'SETTINGS.TITLE' | translate" tabIcon="settings"></ion-tab>
 </ion-tabs>

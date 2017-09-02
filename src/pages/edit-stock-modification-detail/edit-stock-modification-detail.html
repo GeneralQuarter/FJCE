@@ -9,17 +9,17 @@
   <ion-navbar>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
-        Retour
+        {{ 'BACK' | translate }}
       </button>
     </ion-buttons>
-    <ion-title>Modification de stock</ion-title>
+    <ion-title>{{ 'STOCK_MODIFICATION.TITLE' | translate }}</ion-title>
   </ion-navbar>
 
   <ion-toolbar color="primary">
     <ion-title>{{ rawMaterial.name }}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="addStockModification()">
-        Ajouter
+        {{ 'ADD' | translate }}
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -31,14 +31,14 @@
   <ion-list>
     <ion-item-group *ngFor="let stockModification of stockModifications | async">
       <ion-item-divider>
-        <button ion-button item-right clear color="danger" (click)="deleteStockModification(stockModification)">Supprimer</button>
+        <button ion-button item-right clear color="danger" (click)="deleteStockModification(stockModification)">{{ 'DELETE' | translate }}</button>
       </ion-item-divider>
       <ion-item>
-        <ion-label floating>Quantité</ion-label>
+        <ion-label floating>{{ 'STOCK_MODIFICATION.DETAIL.QUANTITY' | translate }}</ion-label>
         <ion-input type="number" name="stockModification{{ stockModification.$key }}-quantity" (ionBlur)="updateStockModification(stockModification)" [(ngModel)]="stockModification.quantity"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Commentaire</ion-label>
+        <ion-label floating>{{ 'STOCK_MODIFICATION.DETAIL.COMMENT' | translate }}</ion-label>
         <ion-input type="text" name="stockModification{{ stockModification.$key }}-comment" (ionBlur)="updateStockModification(stockModification)" [(ngModel)]="stockModification.comment"></ion-input>
       </ion-item>
     </ion-item-group>

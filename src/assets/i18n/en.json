@@ -1,0 +1,76 @@
+{
+  "TITLE": "Chocolat Etcetera - Fabrication Journal",
+  "LOGIN": {
+    "EMAIL_LABEL": "Email",
+    "PASSWORD_LABEL": "Password",
+    "LOGIN_BUTTON": "Login",
+    "EMAIL_PASSWORD_EMPTY_ERROR": "Please enter a email and password"
+  },
+  "JOURNAL": {
+    "TITLE": "Journal"
+  },
+  "STOCK_MODIFICATION": {
+    "TITLE": "Stock Modification",
+    "DETAIL": {
+      "QUANTITY": "Quantity",
+      "COMMENT": "Comment"
+    }
+  },
+  "PRODUCTION": {
+    "TITLE": "Production",
+    "COMPOSED_INGREDIENTS_HEADER": "Composed ingredients",
+    "TIMES_PRODUCED_PLACEHOLDER": "Times produced",
+    "KG_PRODUCED_PLACEHOLDER": "Kg produced"
+  },
+  "RECIPES": {
+    "TITLE": "Recipes",
+    "EMPTY_LIST": "No Recipe"
+  },
+  "STOCK": {
+    "TITLE": "Stock",
+    "COMPOSED_BADGE": "Composed"
+  },
+  "CONSUMPTION": {
+    "TITLE": "Consumption",
+    "IN_CONSTRUCTION_MESSAGE": "Coming soon!"
+  },
+  "SETTINGS": {
+    "TITLE": "Settings",
+    "ACCOUNT": "Account",
+    "LOGOUT_BUTTON": "Logout",
+    "CONNECTED_AS": "Connected as",
+    "APPLICATION": "Application",
+    "VERSION": "Version",
+    "ENVIRONMENT": "Environment",
+    "BUG_REPORT_NEW_FEATURE": "Bug Report/New Feature"
+  },
+  "NEW_STOCK": {
+    "TITLE": {
+      "EDIT": "Edit {{name}}",
+      "NEW": "New Stock",
+      "DELETE": "Delete {{name}}"
+    },
+    "SUB_INGREDIENTS": "Sub ingredients",
+    "QUANTITY_FOR_EACH_SUB_INGREDIENT_HEADER": "Quantity (kg) for 1 kg of the current stock"
+  },
+  "NEW_RECIPE": {
+    "TITLE": {
+      "EDIT": "Edit {{name}}",
+      "NEW": "New Recipe",
+      "DELETE": "Delete {{name}}"
+    },
+    "INGREDIENTS": "Ingredients",
+    "QUANTITY_FOR_EACH_INGREDIENTS_HEADER": "Quantities (kg)"
+  },
+  "CANCEL": "Cancel",
+  "DONE": "Done",
+  "EDIT": "Edit",
+  "LOADING": "Loading",
+  "SEARCH_PLACEHOLDER": "Search",
+  "ADD": "Add",
+  "SAVE": "Save",
+  "DELETE": "Delete",
+  "BACK": "Back",
+  "NAME": "Name",
+  "IRREVERSIBLE_ACTION": "This action is irreversible"
+}

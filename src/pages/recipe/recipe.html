@@ -7,10 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Recipe</ion-title>
+    <ion-title>{{ 'RECIPES.TITLE' | translate}}</ion-title>
   </ion-navbar>
   <ion-toolbar color="primary">
-    <ion-searchbar placeholder="Recherche" (ionInput)="searchRecipes($event)"></ion-searchbar>
+    <ion-searchbar [placeholder]="'SEARCH_PLACEHOLDER' | translate" (ionInput)="searchRecipes($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -19,10 +19,10 @@
   <ion-list>
     <ion-item *ngIf="loading" no-lines>
       <ion-spinner item-start></ion-spinner>
-      Chargement...
+      {{ 'LOADING' | translate}}...
     </ion-item>
     <ion-item *ngIf="empty" no-lines text-center>
-      Aucune recette
+      {{ 'RECIPES.EMPTY_LIST' | translate }}
     </ion-item>
     <button ion-item *ngFor="let recipe of recipes | async" (click)="openAddNewRecipeModal(recipe)">
       {{ recipe.name }}

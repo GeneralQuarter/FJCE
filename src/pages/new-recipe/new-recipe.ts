@@ -4,6 +4,7 @@ import {Recipe, RecipeProvider} from "../../providers/recipe/recipe";
 import {RawMaterial, RawMaterialProvider} from "../../providers/raw-material/raw-material";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
+import {TranslateService} from "@ngx-translate/core";
 
 /**
  * Generated class for the NewRecipePage page.
@@ -26,7 +27,8 @@ export class NewRecipePage implements OnInit{
               public viewCtrl: ViewController,
               private rawMaterialProvider: RawMaterialProvider,
               private alertCtrl: AlertController,
-              private recipeProvider: RecipeProvider) {
+              private recipeProvider: RecipeProvider,
+              private translateService: TranslateService) {
   }
 
   ngOnInit() {
@@ -79,24 +81,26 @@ export class NewRecipePage implements OnInit{
   }
 
   deleteRecipe() {
-    let alert = this.alertCtrl.create({
-      title: 'Supprimer ' + this.recipe.name,
-      message: 'Cette action est irréversible',
-      buttons: [
-        {
-          text: 'Annuler',
-          role: 'cancel'
-        },
-        {
-          text: 'Supprimer',
-          handler: () => {
-            this.recipeProvider.deleteRecipe(this.recipe);
-            this.dismiss();
+    this.translateService.get(['NEW_RECIPE.TITLE.DELETE', 'IRREVERSIBLE_ACTION', 'CANCEL', 'DELETE'], this.recipe).subscribe( translation => {
+      let alert = this.alertCtrl.create({
+        title: translation['NEW_RECIPE.TITLE.DELETE'],
+        message: translation['IRREVERSIBLE_ACTION'],
+        buttons: [
+          {
+            text: translation['CANCEL'],
+            role: 'cancel'
+          },
+          {
+            text: translation['DELETE'],
+            handler: () => {
+              this.recipeProvider.deleteRecipe(this.recipe);
+              this.dismiss();
+            }
           }
-        }
-      ]
+        ]
+      });
+      alert.present();
     });
-    alert.present();
   }
 
   compareFn2(e1: RawMaterial, e2: RawMaterial): boolean {

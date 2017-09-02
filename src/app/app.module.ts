@@ -25,10 +25,17 @@ import {AngularFireAuthModule} from "angularfire2/auth";
 import {devEnv, prodEnv} from "./environments";
 import {SettingsPage} from "../pages/settings/settings";
 import { VersionProvider } from '../providers/version/version';
-import {HttpModule} from "@angular/http";
+import {Http, HttpModule} from "@angular/http";
 import { AuthProvider } from '../providers/auth/auth';
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {IonicStorageModule} from "@ionic/storage";
 
 let firebaseConfig = process.env.IONIC_ENV === "dev" ? devEnv.firebase : prodEnv.firebase;
+
+export function createTranslateLoader(http: Http) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -50,7 +57,15 @@ let firebaseConfig = process.env.IONIC_ENV === "dev" ? devEnv.firebase : prodEnv
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [Http]
+      }
+    }),
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule

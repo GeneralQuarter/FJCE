@@ -8,13 +8,13 @@
   <ion-navbar>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
-        Retour
+        {{ 'BACK' | translate }}
       </button>
     </ion-buttons>
-    <ion-title>Modification de stock</ion-title>
+    <ion-title>{{ 'STOCK_MODIFICATION.TITLE' | translate }}</ion-title>
   </ion-navbar>
   <ion-toolbar color="primary">
-    <ion-searchbar placeholder="Recherche" (ionInput)="searchRawMaterials($event)"></ion-searchbar>
+    <ion-searchbar [placeholder]="'SEARCH_PLACEHOLDER' | translate" (ionInput)="searchRawMaterials($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 

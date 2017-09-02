@@ -1,0 +1,76 @@
+{
+  "TITLE": "Chocolat Etcetera - Journal de Fabrication",
+  "LOGIN": {
+    "EMAIL_LABEL": "Email",
+    "PASSWORD_LABEL": "Mot de passe",
+    "LOGIN_BUTTON": "Connexion",
+    "EMAIL_PASSWORD_EMPTY_ERROR": "Veuillez entrer un email et un mot de passe"
+  },
+  "JOURNAL": {
+    "TITLE": "Journal"
+  },
+  "STOCK_MODIFICATION": {
+    "TITLE": "Modification de stock",
+    "DETAIL": {
+      "QUANTITY": "Quantité",
+      "COMMENT": "Commentaire"
+    }
+  },
+  "PRODUCTION": {
+    "TITLE": "Fabrication",
+    "COMPOSED_INGREDIENTS_HEADER": "Composed ingredients",
+    "TIMES_PRODUCED_PLACEHOLDER": "Nombre de fois produite",
+    "KG_PRODUCED_PLACEHOLDER": "Nombre de kg produit"
+  },
+  "RECIPES": {
+    "TITLE": "Recettes",
+    "EMPTY_LIST": "Aucune Recette"
+  },
+  "STOCK": {
+    "TITLE": "Stock",
+    "COMPOSED_BADGE": "Composé"
+  },
+  "CONSUMPTION": {
+    "TITLE": "Consommation",
+    "IN_CONSTRUCTION_MESSAGE": "En construction !"
+  },
+  "SETTINGS": {
+    "TITLE": "Paramètres",
+    "ACCOUNT": "Compte",
+    "LOGOUT_BUTTON": "Déconnexion",
+    "CONNECTED_AS": "Connecté en tant que",
+    "APPLICATION": "Application",
+    "VERSION": "Version",
+    "ENVIRONMENT": "Environment",
+    "BUG_REPORT_NEW_FEATURE": "Report de Bug/Nouvelle Feature"
+  },
+  "NEW_STOCK": {
+    "TITLE": {
+      "EDIT": "Editer {{name}}",
+      "NEW": "Nouveau Stock",
+      "DELETE": "Supprimer {{name}}"
+    },
+    "SUB_INGREDIENTS": "Sous ingrédients",
+    "QUANTITY_FOR_EACH_SUB_INGREDIENT_HEADER": "Quantités (kg) pour 1 kg de la matière editée"
+  },
+  "NEW_RECIPE": {
+    "TITLE": {
+      "EDIT": "Editer {{name}}",
+      "NEW": "Nouvelle Recette",
+      "DELETE": "Supprimer {{name}}"
+    },
+    "INGREDIENTS": "Ingrédients",
+    "QUANTITY_FOR_EACH_INGREDIENTS_HEADER": "Quantités (kg)"
+  },
+  "CANCEL": "Annuler",
+  "DONE": "Ok",
+  "EDIT": "Editer",
+  "LOADING": "Chargement",
+  "SEARCH_PLACEHOLDER": "Recherche",
+  "ADD": "Ajouter",
+  "SAVE": "Sauvegarder",
+  "DELETE": "Supprimer",
+  "BACK": "Retour",
+  "NAME": "Nom",
+  "IRREVERSIBLE_ACTION": "Cette action est irréversible"
+}

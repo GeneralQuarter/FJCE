@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {AngularFireAuth} from "angularfire2/auth";
 import * as firebase from 'firebase/app';
 import {AuthProvider} from "../../providers/auth/auth";
+import {TranslateService} from "@ngx-translate/core";
+import {Storage} from '@ionic/storage';
 
 /**
  * Generated class for the LoginPage page.
@@ -18,9 +20,19 @@ export class LoginPage {
   password: string;
   errorMessage: string;
   loading: boolean;
+  language: string;
 
   constructor(private auth: AngularFireAuth,
-              private authProvider: AuthProvider) {
+              private authProvider: AuthProvider,
+              private translateService: TranslateService,
+              private storage: Storage) {
+    this.storage.get('lang').then(lang => {
+      if (lang) {
+        this.language = lang;
+      } else {
+        this.language = 'fr';
+      }
+    });
     this.auth.authState.subscribe((user: firebase.User) => {
       this.authProvider.authNotifier.next(!!user);
     });
@@ -35,8 +47,16 @@ export class LoginPage {
           this.loading = false;
         })
     } else {
-      this.errorMessage = "Veuillez entrer un email et un mot de passe";
+      this.translateService.get("LOGIN.EMAIL_PASSWORD_EMPTY_ERROR").subscribe(text => {
+        this.errorMessage = text;
+      });
     }
+  }
+
+  changeLanguage() {
+    this.storage.set('lang', this.language).then(() => {
+      this.translateService.use(this.language);
+    });
   }
 
 }

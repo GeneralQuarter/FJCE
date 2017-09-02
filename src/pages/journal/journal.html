@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Journal</ion-title>
+    <ion-title>{{ 'JOURNAL.TITLE' | translate}}</ion-title>
   </ion-navbar>
 
   <ion-toolbar color="primary">
@@ -17,7 +17,7 @@
       </button>
     </ion-buttons>
     <ion-title>
-      <ion-datetime cancelText="Annuler" doneText="Ok" displayFormat="DD/MM/YYYY" (ionChange)="updateDate()" [(ngModel)]="currentDate"></ion-datetime>
+      <ion-datetime [cancelText]="'CANCEL' | translate" [doneText]="'DONE' | translate" displayFormat="DD/MM/YYYY" (ionChange)="updateDate()" [(ngModel)]="currentDate"></ion-datetime>
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addDayToDate(1)">
@@ -32,15 +32,15 @@
 <ion-content>
   <ion-list>
     <ion-item-divider color="secondary">
-      Fabrication
+      {{ 'PRODUCTION.TITLE' | translate }}
       <button ion-button item-right clear color="light" icon-left (click)="openEditProductionModal()">
         <ion-icon name="create"></ion-icon>
-        Editer
+        {{ 'EDIT' | translate}}
       </button>
     </ion-item-divider>
     <ion-item *ngIf="loadingRecipesProduced || loadingStockProduced">
       <ion-spinner item-left></ion-spinner>
-      Chargement...
+      {{ 'LOADING' | translate}}...
     </ion-item>
     <ion-item *ngFor="let recipe of recipesProduced | async">
       {{ recipeNames[recipe.$key] }}
@@ -51,15 +51,15 @@
       <span item-right>{{ stock.$value }}kg</span>
     </ion-item>
     <ion-item-divider color="secondary">
-      Modification de stock
+      {{ 'STOCK_MODIFICATION.TITLE' | translate }}
       <button ion-button item-right clear color="light" icon-left (click)="openEditStockModificationModal()">
         <ion-icon name="create"></ion-icon>
-        Editer
+        {{ 'EDIT' | translate }}
       </button>
     </ion-item-divider>
     <ion-item *ngIf="loadingStockModifications">
       <ion-spinner item-left></ion-spinner>
-      Chargement...
+      {{ 'LOADING' | translate}}...
     </ion-item>
     <ion-item-group *ngFor="let stockModification of stockModifications | async">
       <ion-item *ngFor="let stockModificationDetail of getValues(stockModification)">

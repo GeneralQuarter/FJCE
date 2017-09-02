@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Paramètres</ion-title>
+    <ion-title>{{ 'SETTINGS.TITLE' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,31 +16,31 @@
 <ion-content>
   <ion-list>
     <ion-item-divider color="secondary">
-      Compte
+      {{ 'SETTINGS.ACCOUNT' | translate }}
       <button ion-button item-right clear color="light" (click)="logOut()">
-        Déconnexion
+        {{ 'SETTINGS.LOGOUT_BUTTON' | translate }}
       </button>
     </ion-item-divider>
     <ion-item>
-      Connecté en tant que
+      {{ 'SETTINGS.CONNECTED_AS' | translate }}
       <h2 item-right>{{ user.email }}</h2>
     </ion-item>
     <ion-item-divider color="secondary">
-      Application
+      {{ 'SETTINGS.APPLICATION' | translate }}
     </ion-item-divider>
     <ion-item>
-      Version
+      {{ 'SETTINGS.VERSION' | translate }}
       <h2 item-right>{{ version | async}}</h2>
     </ion-item>
     <ion-item>
-      Environment
+      {{ 'SETTINGS.ENVIRONMENT' | translate }}
       <h2 item-right>{{ environment }}</h2>
     </ion-item>
     <ion-item-divider color="secondary" *ngIf="false">
-      Feedback/Bug report
+      {{ 'SETTINGS.BUG_REPORT_NEW_FEATURE' | translate }}
       <button ion-button item-right clear color="light" icon-left (click)="addFeedback()">
         <ion-icon name="create"></ion-icon>
-        Ajouter
+        {{ 'ADD' | translate }}
       </button>
     </ion-item-divider>
   </ion-list>

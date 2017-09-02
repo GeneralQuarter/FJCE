@@ -7,10 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Stock</ion-title>
+    <ion-title>{{ 'STOCK.TITLE' | translate }}</ion-title>
   </ion-navbar>
   <ion-toolbar color="primary">
-    <ion-searchbar placeholder="Recherche" (ionInput)="searchRawMaterials($event)"></ion-searchbar>
+    <ion-searchbar [placeholder]="'SEARCH_PLACEHOLDER' | translate" (ionInput)="searchRawMaterials($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -18,11 +18,11 @@
   <ion-list>
     <ion-item *ngIf="loading" no-lines>
       <ion-spinner item-start></ion-spinner>
-      Chargement...
+      {{ 'LOADING' | translate }}...
     </ion-item>
     <button ion-item *ngFor="let rawMaterial of rawMaterials | async" (click)="openAddNewStockModal(rawMaterial)">
       {{ rawMaterial.name }}
-      <ion-badge item-right>{{ rawMaterial.ingredients ? "Composé" : "" }}</ion-badge>
+      <ion-badge item-right *ngIf="rawMaterial.ingredients">{{ 'STOCK.COMPOSED_BADGE' | translate }}</ion-badge>
     </button>
   </ion-list>
   <ion-fab right bottom>

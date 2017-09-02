@@ -9,14 +9,14 @@
   <ion-navbar>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
-        Annuler
+        {{ 'CANCEL' | translate }}
       </button>
     </ion-buttons>
 
-    <ion-title>{{rawMaterial.$key? "Editer " + rawMaterial.name : "Nouveau stock"}}</ion-title>
+    <ion-title>{{ (rawMaterial.$key ? 'NEW_STOCK.TITLE.EDIT' : 'NEW_STOCK.TITLE.NEW') | translate:rawMaterial }}</ion-title>
 
     <ion-buttons end>
-      <button ion-button color="primary" (click)="addOrUpdateRawMaterial()">{{rawMaterial.$key? "Sauvegarder" : "Ajouter"}}</button>
+      <button ion-button color="primary" (click)="addOrUpdateRawMaterial()">{{ (rawMaterial.$key ? 'SAVE' : 'ADD') | translate }}</button>
     </ion-buttons>
   </ion-navbar>
 
@@ -26,12 +26,12 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-label floating>Nom</ion-label>
+      <ion-label floating>{{ 'NAME' | translate }}</ion-label>
       <ion-input type="text" name="name" [(ngModel)]="rawMaterial.name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Sous ingrédients</ion-label>
-      <ion-select cancelText="Annuler" name="ingredients" [(ngModel)]="ingredients" multiple="true" [compareWith]="compareFn" (ionChange)="deleteOrphanRawMaterial()">
+      <ion-label floating>{{ 'NEW_STOCK.SUB_INGREDIENTS' | translate }}</ion-label>
+      <ion-select [cancelText]="'CANCEL' | translate" name="ingredients" [(ngModel)]="ingredients" multiple="true" [compareWith]="compareFn" (ionChange)="deleteOrphanRawMaterial()">
         <ion-option *ngFor="let rm of rawMaterials | async"
                     [value]="rm"
                     [disabled]="rm.$key === rawMaterial.$key">{{ rm.name }}
@@ -41,7 +41,7 @@
   </ion-list>
   <ion-list *ngIf="ingredients.length > 0">
     <ion-list-header color="secondary">
-      Quantités (kg) pour 1 kg de la matière editée
+      {{ 'NEW_STOCK.QUANTITY_FOR_EACH_SUB_INGREDIENT_HEADER' | translate }}
     </ion-list-header>
     <ion-item *ngFor="let ingredient of ingredients">
       <ion-label floating>{{ ingredient.name }}</ion-label>
@@ -53,7 +53,7 @@
 <ion-footer *ngIf="rawMaterial.$key">
   <ion-toolbar>
     <ion-buttons left>
-      <button ion-button color="danger" (click)="deleteRawMaterial()">Supprimer</button>
+      <button ion-button color="danger" (click)="deleteRawMaterial()">{{ 'DELETE' | translate }}</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
