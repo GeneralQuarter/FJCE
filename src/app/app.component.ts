@@ -4,10 +4,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {LoginPage} from "../pages/login/login";
-import {AuthProvider} from "../providers/auth/auth";
 import {TabsPage} from "../pages/tabs/tabs";
 import {TranslateService} from "@ngx-translate/core";
 import {Storage} from '@ionic/storage';
+import {AngularFireAuth} from "angularfire2/auth";
 
 @Component({
   templateUrl: 'app.html'
@@ -18,11 +18,11 @@ export class MyApp {
   constructor(platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
-              authProvider: AuthProvider,
+              auth: AngularFireAuth,
               translateService: TranslateService,
               storage: Storage) {
-    authProvider.authNotifier.subscribe((authed) => {
-      if (authed) {
+    auth.authState.subscribe((authed) => {
+      if (!!authed) {
         this.rootPage = TabsPage;
       } else {
         this.rootPage = LoginPage;

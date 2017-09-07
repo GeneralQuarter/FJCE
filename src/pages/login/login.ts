@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import {AngularFireAuth} from "angularfire2/auth";
-import * as firebase from 'firebase/app';
-import {AuthProvider} from "../../providers/auth/auth";
 import {TranslateService} from "@ngx-translate/core";
 import {Storage} from '@ionic/storage';
 
@@ -23,7 +21,6 @@ export class LoginPage {
   language: string;
 
   constructor(private auth: AngularFireAuth,
-              private authProvider: AuthProvider,
               private translateService: TranslateService,
               private storage: Storage) {
     this.storage.get('lang').then(lang => {
@@ -32,9 +29,6 @@ export class LoginPage {
       } else {
         this.language = 'fr';
       }
-    });
-    this.auth.authState.subscribe((user: firebase.User) => {
-      this.authProvider.authNotifier.next(!!user);
     });
   }
 
