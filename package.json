@@ -38,8 +38,9 @@
   "devDependencies": {
     "@ionic/app-scripts": "2.1.4",
     "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-bump": "^2.7.0",
+    "gulp-conventional-changelog": "^1.1.5",
     "gulp-git": "^2.4.2",
-    "gulp-json-editor": "^2.2.1",
     "gulp-shell": "^0.6.3",
     "ionic": "3.9.2",
     "promise-polyfill": "^6.0.2",
@@ -49,12 +50,5 @@
   "description": "An Ionic project",
   "config": {
     "ionic_webpack": "./webpack.config.js"
-  },
-  "standard-version": {
-    "scripts": {
-      "precommit": "gulp pre-commit",
-      "postbump": "gulp post-bump",
-      "posttag": "gulp post-tag"
-    }
   }
 }
