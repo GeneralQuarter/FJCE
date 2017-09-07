@@ -83,6 +83,11 @@ gulp.task("post-tag", gulp.series(
   "firebase-deploy"
 ));
 
+gulp.task("pre-commit", function () {
+  return gulp.src("./src/assets/version.json")
+    .pipe(git.add());
+});
+
 function getCurrentVersion() {
   return JSON.parse(fs.readFileSync('./package.json')).version;
 }

@@ -52,6 +52,7 @@
   },
   "standard-version": {
     "scripts": {
+      "precommit": "gulp pre-commit",
       "postbump": "gulp post-bump",
       "posttag": "gulp post-tag"
     }
