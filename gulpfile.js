@@ -73,7 +73,7 @@ gulp.task('bump-version', function () {
 
 gulp.task('commit-changes', function () {
   return gulp.src('.')
-    .pipe(git.add())
+    .pipe(git.add('.'))
     .pipe(git.commit('chore(release): Bumped version number to ' + getCurrentVersion()));
 });
 
