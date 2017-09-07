@@ -73,10 +73,6 @@ gulp.task("copy-version", function () {
     .pipe(gulp.dest("./src/assets/"));
 });
 
-gulp.task("pre-bump", gulp.series(
-  "merge-develop-into-master"
-));
-
 gulp.task("post-bump", gulp.series(
   "copy-version",
   "build-prod"

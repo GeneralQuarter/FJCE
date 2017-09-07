@@ -52,7 +52,6 @@
   },
   "standard-version": {
     "scripts": {
-      "prebump": "gulp pre-bump",
       "postbump": "gulp post-bump",
       "posttag": "gulp post-tag"
     }
