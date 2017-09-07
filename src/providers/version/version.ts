@@ -20,8 +20,8 @@ export class VersionProvider {
       return Promise.resolve(this.version);
     } else {
       return new Promise(resolve => {
-        this.http.get('assets/version.txt').subscribe(res => {
-          this.version = res.text();
+        this.http.get('assets/version.json').subscribe(res => {
+          this.version = res.json().version;
           resolve(this.version);
         });
       });

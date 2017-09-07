@@ -1,6 +1,6 @@
 {
   "name": "FJCE",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "author": "Quentin Gangler",
   "homepage": "https://fjce-f034b.firebaseapp.com/",
   "private": true,
@@ -38,17 +38,23 @@
   "devDependencies": {
     "@ionic/app-scripts": "2.1.4",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-edit": "0.0.1",
     "gulp-git": "^2.4.2",
+    "gulp-json-editor": "^2.2.1",
     "gulp-shell": "^0.6.3",
     "ionic": "3.9.2",
     "promise-polyfill": "^6.0.2",
     "typescript": "2.3.4",
-    "webpack-merge": "^4.1.0",
-    "yargs": "^8.0.2"
+    "webpack-merge": "^4.1.0"
   },
   "description": "An Ionic project",
   "config": {
     "ionic_webpack": "./webpack.config.js"
+  },
+  "standard-version": {
+    "scripts": {
+      "prebump": "gulp pre-bump",
+      "postbump": "gulp post-bump",
+      "posttag": "gulp post-tag"
+    }
   }
 }
