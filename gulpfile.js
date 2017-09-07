@@ -67,7 +67,9 @@ gulp.task('push-to-master', function (done) {
 
 gulp.task('bump-version', function () {
   return gulp.src(['./package.json', './src/assets/version.json'])
-    .pipe(bump({type: 'patch'}).on('error', gutil.log))
+    .pipe(bump({type: 'patch'}).on('error', function (error) {
+      throw error;
+    }))
     .pipe(gulp.dest('./'));
 });
 
