@@ -42,9 +42,9 @@
                  name="recipeProduced{{ recipe.$key }}"
                  [(ngModel)]="recipesProduced[recipe.$key]"
                  text-right
-                 [placeholder]="'TIMES_PRODUCED_PLACEHOLDER' | translate"></ion-input>
+                 [placeholder]="'PRODUCTION.TIMES_PRODUCED_PLACEHOLDER' | translate"></ion-input>
     </ion-item>
-    <ion-item-divider color="secondary">{{ 'COMPOSED_INGREDIENTS_HEADER' | translate }}</ion-item-divider>
+    <ion-item-divider color="secondary">{{ 'PRODUCTION.COMPOSED_INGREDIENTS_HEADER' | translate }}</ion-item-divider>
     <ion-item *ngIf="loadingComposedMaterials" no-lines>
       <ion-spinner item-left></ion-spinner>
       {{ 'LOADING' | translate }}...
@@ -55,7 +55,7 @@
                  name="composedMaterialsProduced{{ composedMaterial.$key }}"
                  [(ngModel)]="composedMaterialsProduced[composedMaterial.$key]"
                  text-right
-                 [placeholder]="'KG_PRODUCED_PLACEHOLDER' | translate"></ion-input>
+                 [placeholder]="'PRODUCTION.KG_PRODUCED_PLACEHOLDER' | translate"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>

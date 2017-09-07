@@ -18,7 +18,7 @@
   },
   "PRODUCTION": {
     "TITLE": "Fabrication",
-    "COMPOSED_INGREDIENTS_HEADER": "Composed ingredients",
+    "COMPOSED_INGREDIENTS_HEADER": "Ingrédients composés",
     "TIMES_PRODUCED_PLACEHOLDER": "Nombre de fois produite",
     "KG_PRODUCED_PLACEHOLDER": "Nombre de kg produit"
   },
