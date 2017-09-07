@@ -65,12 +65,12 @@ gulp.task('push-to-master', function (done) {
   });
 });
 
-gulp.task('bump-version', function () {
-  return gulp.src(['./package.json', './src/assets/version.json'])
-    .pipe(bump({type: 'patch'}).on('error', function (error) {
-      throw error;
-    }))
-    .pipe(gulp.dest('./'));
+gulp.task('bump-version-package', function () {
+  return bumpVersion('./', 'package.json');
+});
+
+gulp.task('bump-version-app', function () {
+  return bumpVersion('./src/assets/', 'version.json');
 });
 
 gulp.task('commit-changes', function () {
@@ -99,7 +99,8 @@ gulp.task('changelog', function () {
 
 gulp.task('release', gulp.series(
   'merge-develop-into-master',
-  'bump-version',
+  'bump-version-package',
+  'bump-version-app',
   'build-prod',
   'changelog',
   'commit-changes',
@@ -110,4 +111,12 @@ gulp.task('release', gulp.series(
 
 function getCurrentVersion() {
   return JSON.parse(fs.readFileSync('./package.json')).version;
+}
+
+function bumpVersion(path, filename) {
+  return gulp.src(path + filename)
+    .pipe(bump({type: 'patch'}).on('error', function (error) {
+      throw error;
+    }))
+    .pipe(gulp.dest(path));
 }
